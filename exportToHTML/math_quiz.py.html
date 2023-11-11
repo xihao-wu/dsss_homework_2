@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>math_quiz.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+.s5 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+math_quiz.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">random</span>
+
+
+<span class="s0">def </span><span class="s1">generate_random_number(min_value</span><span class="s0">, </span><span class="s1">max_value):</span>
+    <span class="s2">&quot;&quot;&quot; 
+    Generate a random integer between min_value and max_value. 
+ 
+    :param min_value: The minimum value of the range. 
+    :param max_value: The maximum value of the range. 
+    :return: Random integer between min_value and max_value. 
+    &quot;&quot;&quot;</span>
+    <span class="s0">return </span><span class="s1">random.randint(min_value</span><span class="s0">, </span><span class="s1">max_value)</span>
+
+
+<span class="s0">def </span><span class="s1">choose_random_operator():</span>
+    <span class="s2">&quot;&quot;&quot; 
+    Randomly choose a math operator from +, -, or *. 
+ 
+    :return: A string representing a math operator. 
+    &quot;&quot;&quot;</span>
+    <span class="s0">return </span><span class="s1">random.choice([</span><span class="s3">'+'</span><span class="s0">, </span><span class="s3">'-'</span><span class="s0">, </span><span class="s3">'*'</span><span class="s1">])</span>
+
+
+<span class="s0">def </span><span class="s1">create_math_problem(num1</span><span class="s0">, </span><span class="s1">num2</span><span class="s0">, </span><span class="s1">operator):</span>
+    <span class="s2">&quot;&quot;&quot; 
+    Create a math problem string and calculate its answer. 
+ 
+    :param num1: The first number in the math problem. 
+    :param num2: The second number in the math problem. 
+    :param operator: The operator of the math problem. 
+    :return: A tuple containing the math problem string and its answer. 
+    &quot;&quot;&quot;</span>
+    <span class="s1">problem = </span><span class="s3">f&quot;</span><span class="s0">{</span><span class="s1">num1</span><span class="s0">} {</span><span class="s1">operator</span><span class="s0">} {</span><span class="s1">num2</span><span class="s0">}</span><span class="s3">&quot;</span>
+    <span class="s0">if </span><span class="s1">operator == </span><span class="s3">'+'</span><span class="s1">:</span>
+        <span class="s1">answer = num1 + num2</span>
+    <span class="s0">elif </span><span class="s1">operator == </span><span class="s3">'-'</span><span class="s1">:</span>
+        <span class="s1">answer = num1 - num2</span>
+    <span class="s0">else</span><span class="s1">:</span>
+        <span class="s1">answer = num1 * num2</span>
+    <span class="s0">return </span><span class="s1">problem</span><span class="s0">, </span><span class="s1">answer</span>
+
+
+<span class="s0">def </span><span class="s1">math_quiz():</span>
+    <span class="s2">&quot;&quot;&quot; 
+    Run a math quiz game where the user solves math problems. 
+    &quot;&quot;&quot;</span>
+    <span class="s1">score = </span><span class="s4">0</span>
+    <span class="s1">total_questions = </span><span class="s4">3</span>
+
+    <span class="s1">print(</span><span class="s3">&quot;Welcome to the Math Quiz Game!&quot;</span><span class="s1">)</span>
+    <span class="s1">print(</span><span class="s3">&quot;You will be presented with math problems, and you need to provide the correct answers.&quot;</span><span class="s1">)</span>
+
+    <span class="s0">for </span><span class="s1">_ </span><span class="s0">in </span><span class="s1">range(total_questions):</span>
+        <span class="s1">num1 = generate_random_number(</span><span class="s4">1</span><span class="s0">, </span><span class="s4">10</span><span class="s1">)</span>
+        <span class="s1">num2 = generate_random_number(</span><span class="s4">1</span><span class="s0">, </span><span class="s4">10</span><span class="s1">)  </span><span class="s5"># Fixed to ensure it's always an integer</span>
+        <span class="s1">operator = choose_random_operator()</span>
+
+        <span class="s1">problem</span><span class="s0">, </span><span class="s1">correct_answer = create_math_problem(num1</span><span class="s0">, </span><span class="s1">num2</span><span class="s0">, </span><span class="s1">operator)</span>
+        <span class="s1">print(</span><span class="s3">f&quot;</span><span class="s0">\n</span><span class="s3">Question: </span><span class="s0">{</span><span class="s1">problem</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+        <span class="s0">try</span><span class="s1">:</span>
+            <span class="s1">user_answer = int(input(</span><span class="s3">&quot;Your answer: &quot;</span><span class="s1">))</span>
+            <span class="s0">if </span><span class="s1">user_answer == correct_answer:</span>
+                <span class="s1">print(</span><span class="s3">&quot;Correct! You earned a point.&quot;</span><span class="s1">)</span>
+                <span class="s1">score += </span><span class="s4">1</span>
+            <span class="s0">else</span><span class="s1">:</span>
+                <span class="s1">print(</span><span class="s3">f&quot;Wrong answer. The correct answer is </span><span class="s0">{</span><span class="s1">correct_answer</span><span class="s0">}</span><span class="s3">.&quot;</span><span class="s1">)</span>
+        <span class="s0">except </span><span class="s1">ValueError:</span>
+            <span class="s1">print(</span><span class="s3">&quot;Invalid input. Please enter a valid integer.&quot;</span><span class="s1">)</span>
+
+    <span class="s1">print(</span><span class="s3">f&quot;</span><span class="s0">\n</span><span class="s3">Game over! Your score is: </span><span class="s0">{</span><span class="s1">score</span><span class="s0">}</span><span class="s3">/</span><span class="s0">{</span><span class="s1">total_questions</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+
+
+<span class="s0">if </span><span class="s1">__name__ == </span><span class="s3">&quot;__main__&quot;</span><span class="s1">:</span>
+    <span class="s1">math_quiz()</span>
+</pre>
+</body>
+</html>
